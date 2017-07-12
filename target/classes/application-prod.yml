@@ -1,0 +1,46 @@
+server:
+  port: 8081
+  session:
+    timeout: 1800
+  #address: acount.yayao8.com
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 200
+    accept-count: 1000
+    max-connections: 1000
+ # connection-timeout: 60 
+spring:
+   datasource:
+     name: master
+     driver-class-name: com.mysql.jdbc.Driver
+     url: jdbc:mysql://118.190.133.146:3306/earn_bar_db
+     username: root
+     password: liliu
+   redis:
+     host: 118.190.133.146
+     password: liliu
+     port: 6379 
+     database: 2
+     timeout: 3000
+     pool: 
+       min-idle: 100
+       max-idle: 300
+       max-active: 800 
+myPugin: 
+  projectName: EarnBar
+  location: /home/config/thirdParty.properties
+  articleUrl: http://zhuanba.jiehao9.com/article.html
+  mainDomain: zhuanba.jiehao9.com
+  shareUrl: http://zhuanba.jiehao9.com/share.html
+  shareDomain: zhuanba.jiehao9.com
+  gmwDomain: zhuanba.jiehao9.com
+  ssDomain: zhuanba.jiehao9.com
+  adDomain: zhuanba.jiehao9.com
+  rabbitmq:
+    DIRECT_EXCHANGE: zhuanba.exchange.direct
+    DIRECT_ROUTINGKEY: zhuanba.routingkey.direct
+    DIRECT_QUEUE: zhuanba.queue.direct
+  alibabaSmsAppkey: 23431362
+  alibabaSmsAppsecret: dfbbbfe72864929214f23f48c901a638
+  alibabaSmsSignName: 雅耀
+  alibabaSmsTemplateCodeId: SMS_13026946

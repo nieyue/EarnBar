@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html ng-app="indexApp" ng-controller="indexCtrl" ng-class="fontSize">
+<head>
+<title ng-bind="wapName"></title>
+<meta name="baidu_union_verify" content="d98a740e1480fdd663c524b7e4c0b3be">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<meta name="keywords" content="{{wapName}}">
+<meta charset="UTF-8">
+<meta name="description"
+	content="{{wapName}}">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/swiper.min.css" rel="stylesheet">
+<link href="/resources/css/base.css" rel="stylesheet">
+</head>
+
+<body>
+	<div  class="comment-wrap ">
+		<!-- 新闻列表 -->
+		<div class='loadAnimation'style="margin-top:0px !important;z-index:99999;" ><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+		<div  style="margin-top:0px !important;display:none;overflow: hidden;" id="loadAnimationBody">
+		
+		<hr>
+		<div style="display:inline-block;border-bottom:1px solid #4780e5;margin-bottom:1px;margin:0 10px;">
+	        <span style="font-weight:bold;font-size:1.1rem">
+	        热门推荐
+	        </span>
+	    </div>
+		<!-- 第二列表 -->
+		<div  class="listGroup list-group media comment-list-item" ng-repeat="article in articleList" on-finish-render-filters  ng-click="goRedirectUrl(article.articleId,article.redirectUrl)">
+			<!-- 一张图片列表 -->
+			<div ng-if="article.imgList.length==0 ||article.imgList.length==1" style="width:100%;">
+			<div class="media-body comment-right-body" style="display:inline-block;width:65%;">
+				<div class="pull-left">
+					<div class="comment-right-body-title">
+						<span style="font-size:1rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
+					</div>
+					<!-- <div class="text-muted" style="color:#bfbebe;font-size:14px;">
+					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
+					<span style="float: left;margin:0 5px;line-height:16px;">|</span>
+					<span   ng-bind="article.createDate | dateDiff"></span>
+					</div> -->
+				</div>
+			</div>
+			<div class="media-left" style="vertical-align:middle;width:33%;padding-right:0 !important;display:inline-block;">
+				 <img class="comment-list-item-img"
+					ng-src="{{article.imgList[0].imgAddress||'http://img.fuwu88.cn/uploaderPath/img/20170623/14981883995725043847212203.png'}}" >
+					<div ng-if="article.type=='视频'" class="video-radius"><div class="triangle-right"></div></div>
+				<!-- <a href="#" style="padding:5px 0 !important;position: relative;left: 0;top:0;display:inline-block;width:100%;">
+				</a> -->
+			</div> 
+			</div>
+			<!-- 两张图片列表 -->
+			<div ng-if="article.imgList.length==2">
+					<div class="comment-right-body-title">
+						<span style="font-size:1rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
+					</div>
+			<div class="text-center" style="margin-left:-0.6rem">
+				<a href="#" style="width:100%;">
+				<div ng-repeat="img in article.imgList" class="comment-list-item-img-response2" style="position: relative;left: 0;top:0;display:inline-block;">
+				 <img style="width:100%;"
+					ng-src="{{img.imgAddress}}" >
+					<div ng-if="article.type=='视频'" class="video-radius"><div class="triangle-right"></div></div>
+				</div>
+				</a>
+			</div>
+			<!-- <div class="media-body comment-right-body">
+				<div class="pull-left">
+					<div class="text-muted" style="color:#bfbebe;font-size:14px;">
+					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
+					<span style="float: left;line-height:16px;margin:0 5px;">|</span>
+					<span   ng-bind="article.createDate | dateDiff"></span>
+					</div>
+				</div>
+			</div> -->
+			</div>
+			<!-- 三张图片列表 -->
+			<div ng-if="article.imgList.length==3">
+					<div class="comment-right-body-title">
+						<span style="font-size:1rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
+					</div>
+			<div class="text-center" style="margin-left:-0.6rem">
+				<a href="#" style="width:100%;">
+				<div ng-repeat="img in article.imgList" class="comment-list-item-img-response3" style="position: relative;left: 0;top:0;display:inline-block;">
+				 <img  style="width:100%"
+					ng-src="{{img.imgAddress}}" >
+					<div ng-if="article.type=='视频'" class="video-radius"><div class="triangle-right"></div></div>
+				</div>
+				</a>
+			</div>
+			<!-- <div class="media-body comment-right-body">
+				<div class="pull-left">
+					<div class="text-muted" style="color:#bfbebe;font-size:14px;">
+					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
+					<span style="float: left;line-height:16px;margin:0 5px;">|</span>
+					<span   ng-bind="article.createDate | dateDiff"></span>
+					</div>
+				</div>
+			</div> -->
+			</div>
+		</div>
+		<!-- 第二列表end -->
+		<!-- 底部end -->
+		<div class="comment-bottom" ng-if="noMore">Copyright 2017 itcast Inc,All rights reserved.</div>
+		<!--  底部end -->
+		</div>
+		<!-- 新闻列表end -->
+		
+	</div>
+		<!-- cnzz -->
+		<div style="display:none;">
+		</div>
+		<iframe id="c_iframe"  height="0" width="0"  src="" style="display:none" ></iframe>
+<!-- 		<iframe id="c_iframe"  height="0" width="0"  src="http://www.newzhuan.com/cross_domain_agent.html" style="display:none" ></iframe> -->
+
+	<script src="/resources/js/jquery2.1.js"></script>
+	<script src="/resources/js/bootstrap3.2.0.js"></script>
+	<script src="/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/resources/js/swiper.min.js"></script>
+	<script src="/resources/js/base.js"></script>
+	<script>
+	$(function(){
+	//获取data-src
+	$("img").each(function(index){
+		if($(this).attr("data-src")){
+			$(this).attr("src",$(this).attr("data-src"));
+		}
+	});
+	  
+	//$("#loadAnimationBody").css("display","none");
+	
+	});
+    	var indexApp=angular.module('indexApp',[]);
+    	  indexApp.filter("dateDiff",function(){
+                return function(dateTimeStamp){
+                    return myUtils.getDateDiff(dateTimeStamp);
+                }
+            });
+            indexApp.directive('onFinishRenderFilters', function() {
+					return {
+					restrict: 'A',
+					link: function(scope, element, attr) {
+					if (scope.$last === true) {
+					$("#loadAnimationBody").show();
+					$(".loadAnimation").hide();
+					scope.$emit('ngRepeatFinished');
+	
+					//自动高度
+					  (function autoHeight(){
+					  var b_width;
+					  var b_height;
+					        var c_iframe = document.getElementById("c_iframe");
+					        var csrc=c_iframe.src;
+					        console.log(c_iframe.src )
+					   var num=0;
+					    var interval=setInterval(function(){
+					    if(num>=3){
+					    clearInterval(interval);
+					    return;
+					    }
+					         b_width = Math.max(document.body.scrollWidth,document.body.clientWidth);
+					        b_height = Math.max(document.body.scrollHeight,document.body.clientHeight);
+					        c_iframe.src = csrc + "#" + b_width + "|" + b_height;  // 这里通过hash传递b.htm的宽高
+					    	var ciframe=$("#c_iframe");
+					    	ciframe.appendTo("body");
+					    	console.log(c_iframe.src )
+					    	num++;
+					    }, 200);
+					    })();
+					}
+					}
+					};
+					});
+					
+    	indexApp.controller('indexCtrl',function($rootScope,$scope){
+    	$scope.wapName="";
+    	//$scope.originDomain=location.host;
+    	$scope.originDomain="zhuanba.jiehao9.com";
+    	//http://www.newzhuan.com/cross_domain_agent.html
+    	//初始化share域名
+  /*   	function initShareDomain(){
+    	 $.ajax({
+    		url:"http://"+$scope.originDomain+"/gmwDomain/get",
+    		async:false,  
+    		success:function(data){
+       			console.log(data)
+       			if(data.code=='200'){
+       			var shareDomain=data.list[0].shareDomain;
+       			$rootScope.shareDomain=shareDomain;
+       			//"头协议"+分享域名
+         	var shareDomainUrl="http://"+shareDomain+"/cross_domain_agent.html";
+       			//$rootScope.$apply();
+       		$("#c_iframe").attr("src",shareDomainUrl);
+       			return;
+       			}
+       	}});
+       	 
+    	} */
+       	//获取父域名
+       	function getParentDomain(){
+       	var urlReg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;  
+       	var url=null;
+       	if(parent!==window){
+       	try{
+       	url=urlReg.exec(parent.location.href)[0];
+       	}catch(e){
+       	url=urlReg.exec(document.referrer)[0];
+       	}
+       	return url;
+       	}
+       	}
+       	$rootScope.shareDomain=getParentDomain();
+       	//初始化三级域名
+       	$("#c_iframe").attr("src","http://"+getParentDomain()+"/cross_domain_agent.html");
+
+    		function initData(a){
+    			$.ajax({  
+    		          type : "get",  
+    		          url : "http://"+$scope.originDomain+"/article/list?type="+a.type+"&pageNum="+a.pageNum+"&pageSize="+a.pageSize+"&orderName="+a.orderName+"&orderWay="+a.orderWay+"",  
+    		          async : false,  
+    		          success : function(data){
+    		          if(data.list.length<=0){
+    		          $(".loadAnimation").hide();
+    		          	return;
+    		          }
+    		        	  if(a.pageNum>1){
+    		        		  for (var int = 0; int < data.length; int++) {
+    		        			$scope.articleList.push(data.list[int]); 
+							}
+    		        	  }else{
+    		        	  $scope.articleList=data.list; 
+    		        		   
+    		        	  } 
+    		        	  myUtils.myPrevToast("加载完成", null, "remove");
+    		          }  
+    		          });  
+    		}
+    		
+    		$scope.noMore=false;//false还有，true没有更多
+    		$scope.pageNum=1;//第多少个
+    		$scope.pageSize=100;//每页个数
+    		$scope.type="广告";//初始化类别
+    			initData({
+    			pageNum:$scope.pageNum,
+    			pageSize:$scope.pageSize,
+    			type:$scope.type,
+    			orderName:"create_date",
+    			orderWay:"desc"
+    			});
+    			//滚动刷新
+    		function onReachBottom(){
+    			$scope.pageNum=$scope.pageNum+$scope.pageSize;
+    			$scope.pageSize=$scope.pageSize;
+    			myUtils.myFootLoadingToast("relative",null,function(){
+    			var gurl="http://"+$scope.originDomain+"/article/list?pageNum="+$scope.pageNum+"&pageSize="+$scope.pageSize+"&type="+$scope.type+"&orderName=create_date&orderWay=desc";
+    			$.ajax({  
+  		          type : "get",
+  		          timeout: 3000,
+  		          async : false,
+  		          url : gurl,  
+  		          complete: function (xhr) {
+                  myUtils.myFootLoadingToast("relative",null,null,"remove");
+  				if(xhr.responseJSON&&xhr.responseJSON.code==40000){
+  				$scope.noMore=true;
+                  myUtils.myLoadingToast("没有更多了！");
+                	return ;
+         		 }
+  				},
+  		          success : function(data){
+  		      		     myUtils.myFootLoadingToast("relative",null,null,"remove");
+  		        	 if(data.list.length<=0){
+  		        	 $scope.noMore=true;
+  		        	 $scope.$apply();
+  		        	      return;
+  		        	    }
+  		        	    	$scope.noMore=false;
+  		      		        console.log($scope.articleList)
+  		      		        $scope.articleList=$scope.articleList.concat(data.list);
+  		      		        $scope.$apply();
+  		      		         myUtils.myPrevToast("加载完成", null, "remove");
+  		          }  
+  		          });
+    			},"add");
+  		}
+    		$(window).scroll(function(){
+        		console.log($scope.noMore);
+        		if(!navigator.onLine){
+        		myUtils.myLoadingToast("请检查网络！");
+        		return;
+        		}
+        		if(navigator.onLine && $scope.noMore==false && myUtils.isScrollBottom(document)){
+        			onReachBottom();
+        		}
+        			
+        		});
+    		
+    		//跳转页面
+    		$scope.goRedirectUrl=function(articleId,redirectUrl){
+    			//跳回article.html
+    			
+    			console.log("http://"+$rootScope.shareDomain+"/article.html?articleId="+articleId+"&acountId=1000&redirectUrl="+redirectUrl)
+    			location.replace("http://"+$rootScope.shareDomain+"/article.html?articleId="+articleId+"&acountId=1000&redirectUrl="+redirectUrl)
+    			//点击跳转
+    			/* var ciframe=$("#c_iframe");
+    			ciframe.attr("src", ciframe.attr("src") + "#redirect" + redirectUrl);
+    			ciframe.appendTo("body"); */
+    		};
+
+    	});
+    </script>
+    
+    
+</body>
+</html>
