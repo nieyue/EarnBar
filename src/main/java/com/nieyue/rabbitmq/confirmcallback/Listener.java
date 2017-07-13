@@ -146,8 +146,8 @@ public class Listener {
 	        	   //自身财务
 	        	   List<Finance> financelist = financeService.browsePagingFinance(dataRabbitmqDTO.getAcountId(), 1, 1, "finance_id", "asc");
 	        	   Finance selfFinance = financelist.get(0);
-	        	   //自身账户的文章的所有数据
-	        	   List<Data> datalist = dataService.browsePagingData(null, dataRabbitmqDTO.getArticleId(), dataRabbitmqDTO.getAcountId(), 1, Integer.MAX_VALUE, "data_id", "asc");
+	        	   //自身账户的当日文章的所有数据
+	        	   List<Data> datalist = dataService.browsePagingData(new Date(), dataRabbitmqDTO.getArticleId(), dataRabbitmqDTO.getAcountId(), 1, Integer.MAX_VALUE, "data_id", "asc");
 	        	   Data selfData = datalist.get(0);
 	        	   //System.out.println(selfData.toString());
 	        	   //自身收益
@@ -200,24 +200,21 @@ public class Listener {
 	      	        	 BoundValueOperations<String, String> bvo=stringRedisTemplate.boundValueOps(projectName+"ScaleIncrement");//合伙人增量
 	      	        	   double masterMoney = article.getUserUnitPrice()*selfNumber*(masterAcount.getScale()+Double.valueOf(bvo.get()));//合伙人比例收益=合伙人单价*数量*（合伙人收益比例+全局收益比例）
 	      	        	 masterProfit.setMoney(masterMoney);
-	      	        	  boolean bvb = profitService.addProfit(masterProfit);//存储或更新自身收益
-	      	        	  System.err.println(bvb);
-	      	        	   //财务,余额增加, 合伙人总收益增加
+	      	        	  boolean bvb = profitService.addProfit(masterProfit);//存储或更新父账户收益
+	      	        	  //System.err.println(bvb);
+	      	        	   //财务,余额增加, 父账户总收益增加
 	    	        	   //获取上级账户所有收益
 	    	        	   List<Profit> masterprofitlist = profitService.browsePagingProfit(null,masterID , null,null, 1,Integer.MAX_VALUE, "profit_id", "asc");
-	    	        	   Double masterAllMoney=0.0;
+	    	        	   Double masterAllMoney=0.0;//上级账户总收益
+	    	        	   Double masterPartnerProfit=0.0;//上级账户徒弟总收益
 	    	        	   for (Profit profit3 : masterprofitlist) {
 	    	        		   masterAllMoney+=profit3.getMoney();
+	    	        		   if(profit3.getType().equals(1)){
+	    	        			   masterPartnerProfit+=profit3.getMoney();
+	    	        		   }
 	    	        	   }
 	    	        	   //余额=总收益+基准收益+充值金额-消费金额-提现金额
 	    	        	   masterFinance.setMoney(masterAllMoney+selfFinance.getBaseProfit()+masterFinance.getRecharge()-masterFinance.getConsume()-masterFinance.getWithdrawals());
-	    	        	   
-	    	        	   //获取上级账户所有收益
-	    	        	   List<Profit> masterprofitlist2 = profitService.browsePagingProfit(null,masterID , null,1, 1,Integer.MAX_VALUE, "profit_id", "asc");
-	    	        	   Double masterPartnerProfit=0.0;
-	    	        	   for (Profit profit4 : masterprofitlist2) {
-	    	        		   masterPartnerProfit+=profit4.getMoney();
-	    	        	   }
 	    	        	   masterFinance.setPartnerProfit(masterPartnerProfit);
 	    	        	   //初次，父账户奖励
 	    	        	   /*if(selfprofitlist.size()<=1){
