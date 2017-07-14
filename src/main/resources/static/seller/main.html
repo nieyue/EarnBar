@@ -1684,7 +1684,11 @@
             		*/
                     $scope.financeDetailsStatus=function(financeDetails,model){
                     myUtils.myLoginOut("确定通过吗？", function(){
+                     if(model=="审核未通过"){
+                    financeDetails.status=model;
+                    }else{
                     financeDetails.status=model+"完成";
+                    }
                     $.ajax({
                     url:"/financeDetails/update",
                     data:JSON.parse(angular.toJson(financeDetails)),

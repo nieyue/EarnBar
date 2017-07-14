@@ -47,6 +47,7 @@
 			  <span class="text-info" ng-bind="financeDetails.status"></span>
 			  <button class="btn btn-success" ng-if="financeDetails.status=='审核中'" ng-click="financeDetailsStatus(financeDetails,'微信支付')">微信支付通过</button>
 			  <button class="btn btn-primary" ng-if="financeDetails.status=='审核中'" ng-click="financeDetailsStatus(financeDetails,'支付宝支付')">支付宝支付通过</button>
+			  <button class="btn btn-danger" ng-if="financeDetails.status=='审核中'" ng-click="financeDetailsStatus(financeDetails,'审核未通过')">审核未通过</button>
 			  </td>
 			  <td ng-bind="financeDetails.updateDate"></td>
 			  <td>

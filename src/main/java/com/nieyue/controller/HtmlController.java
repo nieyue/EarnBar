@@ -276,8 +276,6 @@ public class HtmlController {
 		return ;
 	}
 	
-	@Value("${myPugin.ssDomain}")
-	String ssDomain;
 	/**
 	 * 二维码
 	 * @param date
@@ -289,7 +287,9 @@ public class HtmlController {
 	public void getBarcode(
 			@RequestParam("acountId")Integer acountId,
 			HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		String text = "http://"+ssDomain+"/share.html?acountId="+acountId;
+		BoundValueOperations<String, String> bvo=stringRedisTemplate.boundValueOps(projectName+"SsDomain");
+		String text = "http://"+bvo.get()+"/share.html?acountId="+acountId;
+		System.out.println(text);
 		QRCodeUtil.encode(text, response.getOutputStream());
 		return ;
 	}

@@ -269,7 +269,8 @@ public class QRCodeUtil {
 
 	public static void main(String[] args) throws Exception {
 		String text = "weixin://wxpay/bizpayurl?pr=x2VAdrL";
-		QRCodeUtil.encode(text,"C:/barcode/logo.jpg","c:/barcode", true);
+		//QRCodeUtil.encode(text,"C:/barcode/logo.jpg","c:/barcode", true);
 		//QRCodeUtil.encode(text,"c:/barcode", true);
+		QRCodeUtil.encode("http://www.completeticketing.net/share.html?acountId=1004", "c:/barcode/1.jpg");
 	}
 }

@@ -143,6 +143,7 @@ public class SessionControllerInterceptor implements HandlerInterceptor {
         		//账户不许删除/增加
         		if( request.getRequestURI().indexOf("/acount/delete")>-1 
         				|| request.getRequestURI().equals("/acount/add")
+        				|| request.getRequestURI().equals("/acount/list")
         				|| request.getRequestURI().equals("/acount/update")
         				||(method.getName().equals("loadAcount")&& request.getRequestURI().indexOf(sessionAcount.getAcountId().toString())<=-1)
         				){
@@ -156,6 +157,7 @@ public class SessionControllerInterceptor implements HandlerInterceptor {
         		//财务不许删除/修改/增加
         		if( request.getRequestURI().indexOf("/finance/delete")>-1 
         				|| request.getRequestURI().indexOf("/finance/update")>-1 
+        				|| request.getRequestURI().indexOf("/finance/list")>-1 
         				|| request.getRequestURI().indexOf("/finance/add")>-1 
         				||(method.getName().equals("loadFinance")&& request.getRequestURI().indexOf(sessionFinance.getFinanceId().toString())<=-1)){
         			throw new MySessionException();

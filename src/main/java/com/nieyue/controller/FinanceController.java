@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nieyue.bean.AcountDTO;
 import com.nieyue.bean.Article;
-import com.nieyue.bean.Data;
 import com.nieyue.bean.Finance;
+import com.nieyue.bean.Profit;
 import com.nieyue.service.AcountService;
 import com.nieyue.service.ArticleService;
 import com.nieyue.service.DataService;
@@ -171,15 +171,15 @@ public class FinanceController {
 			nowMoney+=profit.getMoney();
 		}
 		}*/
-		List<Data> dn = dataService.browsePagingData(new Date(), null, acountId, 1, Integer.MAX_VALUE, "data_id", "desc");
-		for (int i = 0,dnl=dn.size(); i < dnl; i++) {
-			Integer dnaid = dn.get(i).getArticleId();
-			if(dnaid!=null&&!dnaid.equals("")){
-				Article dna = articleService.loadSmallArticle(dnaid);
-				if(dna.getUserUnitPrice()==null||dna.getUserUnitPrice().equals("")){
-					nowMoney+=0.0;
+		List<Profit> ps = profitService.browsePagingProfit(null, acountId, new Date(), null, 1, Integer.MAX_VALUE, "profit_id", "desc");
+		for (int i = 0,psl=ps.size(); i < psl; i++) {
+			Integer psaid = ps.get(i).getArticleId();
+			if(psaid!=null&&!psaid.equals("")){
+				Article psa = articleService.loadSmallArticle(psaid);
+				if(psa.getUserUnitPrice()==null||psa.getUserUnitPrice().equals("")){
+					nowMoney+=0*ps.get(i).getNumber();
 				}else{
-					nowMoney+=dna.getUserUnitPrice()*dn.get(i).getIps();
+					nowMoney+=psa.getUserUnitPrice()*ps.get(i).getNumber();
 				}
 			}
 		}

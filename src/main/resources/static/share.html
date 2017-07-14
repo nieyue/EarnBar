@@ -112,8 +112,9 @@
     $(".dialog").css("display","block");
     };
     var num=1;
+    var domainUrl="http://zhuanba.jiehao9.com";
     function addMasterId(){
-    $.post("/acount/addMasterId",
+    $.post(domainUrl+"/acount/addMasterId",
     {
     masterId:myUtils.GetQueryString("acountId"),
     appVersion:navigator.appVersion

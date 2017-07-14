@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class AcountServiceImpl implements AcountService{
 	FinanceDao financeDao;
 	@Resource
 	StringRedisTemplate stringRedisTemplate;
+	@Value("${myPugin.projectName}")
+	String projectName;
+	
 	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
 	public boolean addAcount(Acount acount) {
@@ -37,7 +41,7 @@ public class AcountServiceImpl implements AcountService{
 		finance.setRecharge(0.0);
 		finance.setConsume(0.0);
 		finance.setWithdrawals(0.0);
-		BoundValueOperations<String, String> etfubp = stringRedisTemplate.boundValueOps("EarnTurnFinanceUnitBaseProfit");//单个基准收益；
+		BoundValueOperations<String, String> etfubp = stringRedisTemplate.boundValueOps(projectName+"FinanceUnitBaseProfit");//单个基准收益；
 		Double unitBaseProfit=0.0;
 		if(etfubp.get()!=null&&!etfubp.get().equals("")){
 			unitBaseProfit=Double.valueOf(etfubp.get());

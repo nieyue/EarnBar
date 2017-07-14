@@ -125,19 +125,12 @@ public class AcountController {
 		return ResultUtil.getSR(um);
 	}
 	/**
-	 * 账户修改真实姓名、手机号、微信号、支付宝账号
+	 * 账户修改真实姓名、微信号、支付宝账号
 	 * @return
 	 */
-	@RequestMapping(value = "/updatePhone", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/updateAcount", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody StateResult updatePhoneAcount(@ModelAttribute Acount acount,HttpSession session)  {
-		//账户已经存在
-		if(acountService.loginAcount(acount.getPhone(), null,acount.getAcountId())!=null){
-			return ResultUtil.getSR(false);
-		}
 		Acount newa = acountService.loadAcount(acount.getAcountId());
-		if(acount.getPhone()!=null && !acount.getPhone().equals("")){
-			newa.setPhone(acount.getPhone());
-		}
 		if(acount.getWechat()!=null && !acount.getWechat().equals("")){
 			newa.setWechat(acount.getWechat());
 		}

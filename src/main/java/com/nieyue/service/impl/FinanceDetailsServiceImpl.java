@@ -27,6 +27,13 @@ public class FinanceDetailsServiceImpl implements FinanceDetailsService{
 			return false;
 		}
 		financeDetails.setUpdateDate(new Date());
+		//不许多个
+		List<FinanceDetails> l = financeDetailsDao.browsePagingFinanceDetails(financeDetails.getFinanceId(), financeDetails.getType(), 0, Integer.MAX_VALUE, "finance_details_id", "asc");
+		for (int i = 0; i < l.size(); i++) {
+			if(l.get(i).getStatus().equals("审核中")){
+				return false;
+			};
+		}
 		boolean b = financeDetailsDao.addFinanceDetails(financeDetails);
 		return b;
 	}
@@ -44,6 +51,9 @@ public class FinanceDetailsServiceImpl implements FinanceDetailsService{
 		}
 		//financeDetails.setUpdateDate(new Date());
 		boolean b = financeDetailsDao.updateFinanceDetails(financeDetails);
+		if(financeDetails.getStatus().equals("审核未通过")){
+			return b;
+		}
 		Integer financeId = financeDetails.getFinanceId();
 		Finance finance = financeDao.loadFinance(financeId);
 		//提现
@@ -53,14 +63,14 @@ public class FinanceDetailsServiceImpl implements FinanceDetailsService{
 			}
 			finance.setWithdrawals(finance.getWithdrawals()+financeDetails.getMoney());//加提现余额
 			finance.setMoney(finance.getMoney()-financeDetails.getMoney());//减余额
-			b=financeDao.updateFinance(finance);
 		}
 		//充值
 		if(financeDetails.getType().equals(1)){
 			finance.setRecharge(finance.getRecharge()+financeDetails.getMoney());//加充值金额
 			finance.setMoney(finance.getMoney()+financeDetails.getMoney());//加余额
-			b=financeDao.updateFinance(finance);
 		}
+		b=financeDao.updateFinance(finance);
+		
 		return b;
 	}
 
