@@ -23,19 +23,25 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nieyue.bean.Acount;
 import com.nieyue.comments.IPCountUtil;
 import com.nieyue.limit.RequestLimit;
+import com.nieyue.util.DateUtil;
+import com.nieyue.util.FileUploadUtil;
 import com.nieyue.util.MacAddressUtil;
 import com.nieyue.util.MyDESutil;
 import com.nieyue.util.MyPugin;
 import com.nieyue.util.ResultUtil;
 import com.nieyue.util.StateResult;
 import com.nieyue.util.StateResultList;
+import com.nieyue.util.UploaderPath;
 import com.nieyue.util.barcode.QRCodeUtil;
 import com.nieyue.verification.VerificationCode;
 
@@ -57,6 +63,7 @@ public class HtmlController {
 	VerificationCode verificationCode;
 	@Value("${myPugin.projectName}")
 	String projectName;
+	
 	/**
 	 * 设置全局合伙人收益比例增量
 	 * @param session

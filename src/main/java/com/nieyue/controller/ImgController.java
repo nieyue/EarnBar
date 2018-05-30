@@ -1,9 +1,11 @@
 package com.nieyue.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nieyue.bean.Img;
 import com.nieyue.service.ImgService;
+import com.nieyue.util.DateUtil;
+import com.nieyue.util.FileUploadUtil;
 import com.nieyue.util.ResultUtil;
 import com.nieyue.util.StateResult;
 import com.nieyue.util.StateResultList;
+import com.nieyue.util.UploaderPath;
 
 
 /**
@@ -67,10 +73,33 @@ public class ImgController {
 	 * 图片增加
 	 * @return 
 	 */
-	@RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
+	/*@RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody StateResult addImg(@ModelAttribute Img img, HttpSession session) {
 		boolean am = imgService.addImg(img);
 		return ResultUtil.getSR(am);
+	}*/
+	/**
+	 * 文件增加、修改
+	 * @param editorUpload 上传参数
+	 * @param width 固定图片宽度
+	 * @param height 固定图片高度
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody String addFile(
+			@RequestParam("editorUpload") MultipartFile file,
+			HttpServletRequest request,HttpSession session ) throws IOException  {
+		String fileUrl = null;
+		String filedir=DateUtil.getImgDir();
+		try{
+			fileUrl = FileUploadUtil.FormDataMerImgFileUpload(file, session,UploaderPath.GetValueByKey(UploaderPath.ROOTPATH),UploaderPath.GetValueByKey(UploaderPath.IMG),filedir);
+		}catch (IOException e) {
+			throw new IOException();
+		}
+		StringBuffer url=request.getRequestURL();
+		String redirect_url = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString(); 
+		return redirect_url+fileUrl;
 	}
 	/**
 	 * 图片删除

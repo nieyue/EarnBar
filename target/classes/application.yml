@@ -34,7 +34,7 @@ spring:
   session:
     store-type: redis      
   profiles:
-   # active: dev
+    #active: dev
     active: prod
   rabbitmq:
     addresses: 118.190.133.146

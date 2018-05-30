@@ -142,11 +142,19 @@ public class SessionControllerInterceptor implements HandlerInterceptor {
         	if(sessionRole.getName().equals("用户")){
         		//账户不许删除/增加
         		if( request.getRequestURI().indexOf("/acount/delete")>-1 
-        				|| request.getRequestURI().equals("/acount/add")
+        				|| request.getRequestURI().indexOf("/acount/add")>-1
         				|| request.getRequestURI().equals("/acount/list")
-        				|| request.getRequestURI().equals("/acount/update")
+        				|| request.getRequestURI().indexOf("/acount/update")>-1
         				||(method.getName().equals("loadAcount")&& request.getRequestURI().indexOf(sessionAcount.getAcountId().toString())<=-1)
         				){
+        			//获取合伙人
+        			if(request.getParameter("masterId").equals(sessionAcount.getAcountId().toString())){
+        				return true;
+        			}
+        			//提交修改自身信息
+        			if(request.getParameter("acountId").equals(sessionAcount.getAcountId().toString())){
+        				return true;
+        			}
         			throw new MySessionException();
         		}
         		//意见反馈只许增加
@@ -164,7 +172,11 @@ public class SessionControllerInterceptor implements HandlerInterceptor {
         		}
         		//提现、充值不许删除/修改/增加
         		if( request.getRequestURI().indexOf("/financeDetails/delete")>-1 
+        				|| request.getRequestURI().indexOf("/financeDetails/add")>-1
         				|| request.getRequestURI().indexOf("/financeDetails/update")>-1 ){
+        			if(request.getParameter("financeId").equals(sessionFinance.getFinanceId().toString())){
+        				return true;
+        			}
         			throw new MySessionException();
         		}
         		//图片不许删除/修改/增加

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nieyue.bean.AcountDTO;
-import com.nieyue.bean.Article;
 import com.nieyue.bean.Finance;
 import com.nieyue.bean.Profit;
 import com.nieyue.service.AcountService;
@@ -173,15 +172,16 @@ public class FinanceController {
 		}*/
 		List<Profit> ps = profitService.browsePagingProfit(null, acountId, new Date(), null, 1, Integer.MAX_VALUE, "profit_id", "desc");
 		for (int i = 0,psl=ps.size(); i < psl; i++) {
-			Integer psaid = ps.get(i).getArticleId();
-			if(psaid!=null&&!psaid.equals("")){
-				Article psa = articleService.loadSmallArticle(psaid);
-				if(psa.getUserUnitPrice()==null||psa.getUserUnitPrice().equals("")){
-					nowMoney+=0*ps.get(i).getNumber();
-				}else{
-					nowMoney+=psa.getUserUnitPrice()*ps.get(i).getNumber();
-				}
-			}
+			nowMoney+=ps.get(i).getMoney();
+//			Integer psaid = ps.get(i).getArticleId();
+//			if(psaid!=null&&!psaid.equals("")){
+//				Article psa = articleService.loadSmallArticle(psaid);
+//				if(psa.getUserUnitPrice()==null||psa.getUserUnitPrice().equals("")){
+//					nowMoney+=0*ps.get(i).getNumber();
+//				}else{
+//					nowMoney+=psa.getUserUnitPrice()*ps.get(i).getNumber();
+//				}
+//			}
 		}
 		
 		List<AcountDTO> profitMoneyOrder = financeService.browsePagingFinanceByAcountId(acountId, 1, 10, "profitMoney","desc");

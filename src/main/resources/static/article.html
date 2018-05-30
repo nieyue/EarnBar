@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <meta name="description"
 	content="{{article.title}}">
-  <link href="http://zhuanba.jiehao9.com/resources/css/bootstrap.min.css" rel="stylesheet">
- <link href="http://zhuanba.jiehao9.com/resources/css/swiper.min.css" rel="stylesheet">
-<link href="http://zhuanba.jiehao9.com/resources/css/base.css" rel="stylesheet">
+  <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+ <link href="resources/css/swiper.min.css" rel="stylesheet">
+<link href="resources/css/base.css" rel="stylesheet">
 <style type="text/css">
 iframe,video{
 width:104% !important;
@@ -50,27 +50,27 @@ max-width:100% !important;
 				</div>
 				<div class="text-muted" style="font-size:0.8rem;position:relative;margin:5px 0;">
 					<span ng-bind="article.createDate | limitTo :10" id="ad1-before"></span>
-					<a style="color:#336699" href="http://a.app.qq.com/o/simple.jsp?pkgname=io.dcloud.H518260C7">转赚</a>
+					<!-- <a style="color:#336699" href="http://a.app.qq.com/o/simple.jsp?pkgname=io.dcloud.H518260C7">转赚</a> -->
 					 <span style="color:#ccc; position:absolute;right:0;" >
 					阅读：<span ng-bind="article.readingNumber || '0'"></span>
 					</span>
 				</div >
 				
 				<!-- 广告1 -->
-		<div class="listGroup swiper-slide" style="height:100%;width:100%;margin:10px 0;" ng-repeat="article in ad1List" on-finish-render-filters ng-click="goAd(article)" >
+		<!-- <div class="listGroup swiper-slide" style="height:100%;width:100%;margin:10px 0;" ng-repeat="article in ad1List" on-finish-render-filters ng-click="goAd(article)" >
 			<div class="media-center" style="position: relative;left: 0;top:0;height:100%;">
 						<img class="comment-list-item-img-response1 " style="max-height:50px;" 
 					ng-src="{{article.imgList[0].imgAddress}}" >
 			</div>
-		</div>
+		</div> -->
 		<!-- 广告1 end -->
 				<!-- 广告2 -->
-			<div    style="border-bottom:1px solid #ececec; " >
+			<!-- <div    style="border-bottom:1px solid #ececec; " >
 			</div>
 			<div    style="border-bottom:1px solid #ececec;padding:5px 0;list-style-type: disc !important;color:#696565;font-size:12px" ng-repeat="article in ad2List">
 			&nbsp;&nbsp;&nbsp;&nbsp;● &nbsp;&nbsp;<span   on-finish-render-filters   ng-click="goAd(article)" ng-bind="article.title">
 			</span>
-			</div>
+			</div> -->
 		<!-- 广告2end -->
 				
 				 <div style="font-size:1em !important;" ng-bind-html="article.content" >
@@ -82,15 +82,15 @@ max-width:100% !important;
 					转发：<span ng-bind="article.turnNumber || '0'"></span>
 				</div> -->
 		<hr>
-		<div style="border-bottom:1px solid #ececec;">
+		<!-- <div style="border-bottom:1px solid #ececec;" ng-if="ad3List.length>0">
 	       <div >
 	        <span style="color:red;font-weight:bolder;">|</span>
 	        猜你喜欢
 	    </div>
-		<hr style="margin-bottom:-15px;">
+		<hr style="margin-bottom:-15px;"> -->
 				<!-- 广告3 -->
-		<div class="listGroup list-group media comment-list-item" ng-repeat="article in ad3List" on-finish-render-filters  ng-click="goAd(article)">
-			<!-- 一张图片列表 -->
+<!-- 		<div class="listGroup list-group media comment-list-item" ng-repeat="article in ad3List" on-finish-render-filters  ng-click="goAd(article)">
+			一张图片列表
 			<div ng-if="article.imgList.length==0 ||article.imgList.length==1">
 			<div class="media-left" style="vertical-align:middle;width:32%;">
 				<a href="#" style="padding:5px 0 !important;position: relative;left: 0;top:0;display:inline-block;width:100%;">
@@ -104,15 +104,15 @@ max-width:100% !important;
 					<div class="comment-right-body-title">
 						<span style="font-size:0.85rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
 					</div>
-					<!-- <div class="text-muted" style="color:#bfbebe;font-size:14px;">
+					<div class="text-muted" style="color:#bfbebe;font-size:14px;">
 					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
 					<span style="float: left;margin:0 5px;line-height:16px;">|</span>
 					<span   ng-bind="article.createDate | dateDiff"></span>
-					</div> -->
+					</div>
 				</div>
 			</div> 
 			</div>
-			<!-- 两张图片列表 -->
+			两张图片列表
 			<div ng-if="article.imgList.length==2">
 					<div class="comment-right-body-title">
 						<span style="font-size:0.85rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
@@ -126,17 +126,8 @@ max-width:100% !important;
 				</div>
 				</a>
 			</div>
-			<!-- <div class="media-body comment-right-body">
-				<div class="pull-left">
-					<div class="text-muted" style="color:#bfbebe;font-size:14px;">
-					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
-					<span style="float: left;line-height:16px;margin:0 5px;">|</span>
-					<span   ng-bind="article.createDate | dateDiff"></span>
-					</div>
-				</div>
-			</div> -->
 			</div>
-			<!-- 三张图片列表 -->
+			三张图片列表
 			<div ng-if="article.imgList.length==3">
 					<div class="comment-right-body-title">
 						<span style="font-size:0.85rem;overflow: hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
@@ -150,21 +141,12 @@ max-width:100% !important;
 				</div>
 				</a>
 			</div>
-			<!-- <div class="media-body comment-right-body">
-				<div class="pull-left">
-					<div class="text-muted" style="color:#bfbebe;font-size:14px;">
-					<span style="float: left;" class="newsType"  ng-bind="article.type"></span>
-					<span style="float: left;line-height:16px;margin:0 5px;">|</span>
-					<span   ng-bind="article.createDate | dateDiff"></span>
-					</div>
-				</div>
-			</div> -->
 			</div>
-		</div>
+		</div> -->
 		<!-- 广告3end -->
 		
 				<!-- iframe -->
-				<iframe src="" id="Iframe" frameborder="0" scrolling="no" style="border:0px; width:100%;margin-bottom:50px;"></iframe>
+<!-- 				<iframe src="" id="Iframe" frameborder="0" scrolling="no" style="border:0px; width:100%;margin-bottom:50px;"></iframe> -->
 				 		
 			</div>
 		</div>
@@ -174,36 +156,36 @@ max-width:100% !important;
 			
 		
 			<!-- 广告4悬浮 -->
-<div class="swiper-container swiper-container1" style="position:fixed;left:0;bottom:0;width:100%"   >
+<!-- <div class="swiper-container swiper-container1" style="position:fixed;left:0;bottom:0;width:100%"   >
     <div class="swiper-wrapper" >
 		<div class="listGroup swiper-slide" style="height:100%;width:100%" ng-repeat="article in ad4List" on-finish-render-filters ng-click="goAd(article)">
 			<div class="media-center" style="position: relative;left: 0;top:0;height:100%;">
 						<img class="comment-list-item-img-response1 " style="max-height:50px;" 
 					ng-src="{{article.imgList[0].imgAddress}}" >
-				<!-- <span  style="text-indent:0.5rem;font-size:0.9rem;z-index:99;position:absolute;left:0;bottom:3px;color:#fff;overflow: hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
-				<div style="z-index:9;background-color: #000;opacity: 0.5;height:30px;width:100%;position:absolute;left:0;bottom:0;"></div > -->
+				<span  style="text-indent:0.5rem;font-size:0.9rem;z-index:99;position:absolute;left:0;bottom:3px;color:#fff;overflow: hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;text-overflow:ellipsis;" ng-bind="article.title"></span>
+				<div style="z-index:9;background-color: #000;opacity: 0.5;height:30px;width:100%;position:absolute;left:0;bottom:0;"></div >
 			</div>
 		</div>
     </div>
 		<div class="swiper-pagination" ></div>
-</div>
+</div> -->
 		<!-- 广告4悬浮 end -->
 		<!-- 广告5悬浮 -->
-<div  style="position:fixed;right:3px;top:36%;display:none" ng-style="{display:ad5List.length>0?'block':'none'}"   ng-click="goAd(ad5List[0])">
+<!-- <div  style="position:fixed;right:3px;top:36%;display:none" ng-style="{display:ad5List.length>0?'block':'none'}"   ng-click="goAd(ad5List[0])">
     <img alt="" style="height:50px;width:50px;" ng-src="{{ad5List[0].imgList[0].imgAddress}}">
-</div>
+</div> -->
 		<!-- 广告5悬浮 end -->
 		<!-- cnzz -->
 		<div style="display:none;">
 		<!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260079475'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260079475' type='text/javascript'%3E%3C/script%3E"));</script>
  -->		</div>
 		
-	<script src="http://zhuanba.jiehao9.com/resources/js/jquery2.1.js"></script>
+	<script src="resources/js/jquery2.1.js"></script>
 	<!-- <script src="/resources/js/bootstrap3.2.0.js"></script> -->
-	<script src="http://zhuanba.jiehao9.com/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="resources/js/angularjs.min.1.5.7.js"></script>
 	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
- 	<script src="http://zhuanba.jiehao9.com/resources/js/swiper.min.js"></script> 
-	<script  src="http://zhuanba.jiehao9.com/resources/js/base.js"></script>
+ 	<script src="resources/js/swiper.min.js"></script> 
+	<script  src="resources/js/base.js"></script>
 	<!-- <script src="/resources/js/weixinlogin.js"></script> -->
 
 	<script>
@@ -250,8 +232,8 @@ new Swiper('.swiper-container1', {
 					}); 
     	detailsApp.controller('detailsCtrl',function($rootScope,$scope,$sce){
     	$scope.wapName="每日生活";
-    	//$scope.originDomain=location.host;
-    	$scope.originDomain="zhuanba.jiehao9.com";
+    	$scope.originDomain=location.host;
+    	//$scope.originDomain="zhuanba.jiehao9.com";
     	//初始化ad域名
     	$.ajax({
     		url:"http://"+$scope.originDomain+"/adDomain/get",
@@ -291,7 +273,7 @@ new Swiper('.swiper-container1', {
     		          });  
     		}
     		//广告1
-    		$scope.ad1={
+    		/* $scope.ad1={
     		pageNum:1,
     		pageSize:1,
     		type:"广告1"
@@ -355,7 +337,7 @@ new Swiper('.swiper-container1', {
     			type:$scope.ad5.type,
     			orderName:"create_date",
     			orderWay:"desc"
-    			});
+    			}); */
     		//非跨域广告跳转	
     		$scope.goAd=function(article){
     				if(article.redirectUrl){

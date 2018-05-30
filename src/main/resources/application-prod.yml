@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8092
   session:
     timeout: 1800
   #address: acount.yayao8.com
@@ -29,13 +29,13 @@ spring:
 myPugin: 
   projectName: EarnBar
   location: /home/config/thirdParty.properties
-  articleUrl: http://zhuanba.jiehao9.com/article.html
-  mainDomain: zhuanba.jiehao9.com
-  shareUrl: http://zhuanba.jiehao9.com/share.html
-  shareDomain: zhuanba.jiehao9.com
-  gmwDomain: zhuanba.jiehao9.com
-  ssDomain: zhuanba.jiehao9.com
-  adDomain: zhuanba.jiehao9.com
+  articleUrl: http://zhuanba.fuwu88.cn/article.html
+  mainDomain: zhuanba.fuwu88.cn
+  shareUrl: http://zhuanba.fuwu88.cn/share.html
+  shareDomain: zhuanba.fuwu88.cn
+  gmwDomain: zhuanba.fuwu88.cn
+  ssDomain: zhuanba.fuwu88.cn
+  adDomain: zhuanba.fuwu88.cn
   rabbitmq:
     DIRECT_EXCHANGE: zhuanba.exchange.direct
     DIRECT_ROUTINGKEY: zhuanba.routingkey.direct

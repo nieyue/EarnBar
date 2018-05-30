@@ -21,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.nieyue.interceptor.SessionControllerInterceptor;
+
 @SpringBootApplication
 @Configuration
 //@EnableRedisHttpSession

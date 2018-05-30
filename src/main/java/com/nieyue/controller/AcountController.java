@@ -129,17 +129,16 @@ public class AcountController {
 	 * @return
 	 */
 	@RequestMapping(value = "/updateAcount", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody StateResult updatePhoneAcount(@ModelAttribute Acount acount,HttpSession session)  {
-		Acount newa = acountService.loadAcount(acount.getAcountId());
-		if(acount.getWechat()!=null && !acount.getWechat().equals("")){
-			newa.setWechat(acount.getWechat());
-		}
-		if(acount.getRealname()!=null && !acount.getRealname().equals("")){
-			newa.setRealname(acount.getRealname());
-		}
-		if(acount.getAlipay()!=null && !acount.getAlipay().equals("")){
-			newa.setAlipay(acount.getAlipay());
-		}
+	public @ResponseBody StateResult updatePhoneAcount(
+			@RequestParam(value="acountId")Integer acountId,
+			@RequestParam(value="wechat")String wechat,
+			@RequestParam(value="realName")String realName,
+			@RequestParam(value="alipay")String alipay,
+			HttpSession session)  {
+		Acount newa = acountService.loadAcount(acountId);
+			newa.setWechat(wechat);
+			newa.setRealname(realName);
+			newa.setAlipay(alipay);
 		boolean um = acountService.updateAcount(newa);
 		return ResultUtil.getSR(um);
 	}
